@@ -1,0 +1,40 @@
+<div class="row">
+    <div class="col-md-6">
+        <h2>  Login </h2>
+        <p class="text-danger">{{errorMsg}}</p>
+            <form [formGroup]="addForm" #f="ngForm" (ngSubmit)="onSubmit()">
+                <div class="form-group">
+                    <label for="exampleInputEmail1">First Name</label>
+                    <input 
+                        type="text" 
+                        class="form-control" 
+                        formControlName="first_name">
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputEmail1">last Name</label>
+                    <input 
+                        type="text" 
+                        class="form-control" 
+                        formControlName="last_name">
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputEmail1">Academic Year</label>
+                    <select class="form-control"  name="academic_year" formControlName="academic_year" >
+                        <option value="">Select</option>
+                        <option value="{{academic_year.id}}" *ngFor="let academic_year of academic_years">
+                            {{academic_year.name}}
+                        </option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputEmail1">Experience</label>
+                    <input 
+                        type="number" 
+                        class="form-control" 
+                        formControlName="experience">
+                </div>
+                    <button [disabled]="!f.form.valid" type="submit" class="btn btn-primary">Submit</button>
+                    <a routerLink="/teachers" class="btn ">cancel</a>
+            </form>
+    </div>
+</div>
