@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { ITeacher } from '../../types/teacher';
-import { TeacherService } from '../../teacher.service';
+import { Teacher } from '../types/teacher';
+import { TeacherService } from '../services/teacher.service';
 import { Router } from '@angular/router';
-import { ACADEMIC_YEARS } from './../../const/academic.years';
+import { AuthService } from 'src/app/login/auth.service';
 
 @Component({
   selector: 'app-list',
@@ -11,34 +11,35 @@ import { ACADEMIC_YEARS } from './../../const/academic.years';
 })
 export class ListComponent implements OnInit {
 
-  teachers: ITeacher[];
+  teachers: Teacher[];
   isAdmin: boolean;
-  academicYears;
+  
   constructor(
     private teacherService: TeacherService,
-    private router: Router
+    private router: Router,
+    private authService: AuthService,
   ) { }
 
   ngOnInit(): void {
     
     this.teacherService.getTeachersList().subscribe(
-      (resp: ITeacher[]) => {
+      (resp: Teacher[]) => {
+        console.log('resp list', resp)
         this.teachers = resp
       }
     )
-    this.academicYears = ACADEMIC_YEARS;
+   
+    this.authService.isAdmin().subscribe(
+      (resp) => {
+        this.isAdmin = resp;
+      }
+    );
   }
 
   edit(teacher) {
     this.router.navigate(['teachers/edit', teacher.id])
   }
 
-  yearChanged(value) {
-    console.log('yearChanged', value)
-    this.teacherService.getTeachersList(value).subscribe(
-      (resp: ITeacher[]) => {
-        this.teachers = resp
-      }
-    )
-  }
+ 
+
 }

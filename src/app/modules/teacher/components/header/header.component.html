@@ -1,0 +1,15 @@
+<div class="row header">
+    <div class="col-md-3">
+        SIS App
+    </div>
+    <div class="col-md-7">
+        Academic Year: <select (change)="yearChanged($event.target.value)"> 
+            <option value="">All</option>  
+            <option *ngFor="let year of academicYears" value="{{year.id}}">{{year.name}}</option>
+        </select>
+    </div>
+    <div class="col-md-2">
+      {{username}}
+      <button (click)="logout()">Logout</button>
+    </div>
+</div>

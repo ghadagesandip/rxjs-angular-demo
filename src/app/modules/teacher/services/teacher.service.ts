@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, of } from 'rxjs';
-import { ITeacher } from './types/teacher';
+import { Teacher } from '../types/teacher';
 import { delay } from 'rxjs/operators';
 
 @Injectable({
@@ -8,7 +8,7 @@ import { delay } from 'rxjs/operators';
 })
 export class TeacherService {
 
-  initialTeachers : ITeacher[] = [
+  initialTeachers : Teacher[] = [
     {
       id: 1,
       first_name:'Max',
@@ -24,26 +24,15 @@ export class TeacherService {
       experience: 6
     }
   ];
-  teachers: BehaviorSubject<ITeacher[]> = new BehaviorSubject<ITeacher[]>(this.initialTeachers);
- 
+  teachers: BehaviorSubject<Teacher[]> = new BehaviorSubject<Teacher[]>(this.initialTeachers);
 
   constructor() { }
 
-  getTeachersList (academicYearId: number| undefined = undefined): Observable<ITeacher[]> {
-    if(academicYearId) {
-      const myTeachers = this.teachers.getValue();
-     
-      const filtredResult = myTeachers.filter((teacher: any) => {
-         return teacher.academic_year == academicYearId;
-      })
-      console.log('filtredResult', filtredResult)
-      return of(filtredResult);
-    } else{
-      return this.teachers.pipe(delay(2000));
-    }
+  getTeachersList (): Observable<Teacher[]> {
+    return this.teachers.pipe(delay(2000));
   }
 
-  addTeacherToList(newTeacher: ITeacher): Observable<boolean> {
+  addTeacherToList(newTeacher: Teacher): Observable<boolean> {
 
     const teachers = this.teachers.getValue();
     const latestTeacherId = teachers.length ? teachers[teachers.length-1].id +1: 0;
@@ -53,7 +42,7 @@ export class TeacherService {
     return of(true).pipe(delay(2000));
   }
 
-  updateTeacherfromList(updatedTeacher: ITeacher): Observable<boolean> {
+  updateTeacherfromList(updatedTeacher: Teacher): Observable<boolean> {
     const existingTeachers = this.teachers.getValue();
     let _index=null;
     existingTeachers.find((teacher, index) => {
@@ -72,11 +61,22 @@ export class TeacherService {
   }
 
 
-  getTeacherById(id: number): Observable<ITeacher> {
+  getTeacherById(id: number): Observable<Teacher> {
     const teachers = this.teachers.getValue();
     const teacher = teachers.filter((teacher) => {
       return teacher.id === id
     })
    return of(teacher[0]);
+  }
+
+  filterTeachers(academicYearId: number): void {
+   if(academicYearId) {
+    const filtredResult = this.initialTeachers.filter((teacher: any) => {
+       return teacher.academic_year == academicYearId;
+    })
+    this.teachers.next(filtredResult)
+   } else{
+    this.teachers.next(this.initialTeachers)
+   }
   }
 }

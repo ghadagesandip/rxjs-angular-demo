@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { TeacherService } from '../../teacher.service';
+import { TeacherService } from '../services/teacher.service';
 import { Router, ActivatedRoute } from '@angular/router';
-import { ITeacher } from '../../types/teacher';
-import { ACADEMIC_YEARS } from './../../const/academic.years';
+import { Teacher } from '../types/teacher';
+import { ACADEMIC_YEARS } from '../const/academic.years';
 
 @Component({
   selector: 'app-edit',
@@ -42,7 +42,7 @@ export class EditComponent implements OnInit {
   setFormData(id: number) {
     
     this.teacherService.getTeacherById(id).subscribe(
-      (val: ITeacher) => {
+      (val: Teacher) => {
         this.editForm.patchValue({
           id: val.id,
           first_name: val.first_name,

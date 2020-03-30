@@ -1,9 +1,9 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { LayoutComponent } from './layout/layout.component';
-import { ListComponent } from './pages/list/list.component';
-import { AddComponent } from './pages/add/add.component';
-import { EditComponent } from './pages/edit/edit.component';
+import { ListComponent } from './list-teacher/list.component';
+import { AddComponent } from './add-teacher/add.component';
+import { EditComponent } from './edit-teacher/edit.component';
 import { AuthGaurdService } from './guards/auth-guard.service';
 import { AdminGuardService } from './guards/admin.guard.service';
 

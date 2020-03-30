@@ -3,13 +3,10 @@
         <h2>Teachers list</h2>
     </div>
     <div class="col-md-5">
-        Academic Year: <select (change)="yearChanged($event.target.value)"> 
-            <option value="">All</option>  
-            <option *ngFor="let year of academicYears" value="{{year.id}}">{{year.name}}</option>
-        </select>
+     
     </div>
     <div class="col-md-2">
-        <a *ngIf="isAdmin" routerLink="new">Add Tecaher</a>
+        <a routerLink="new">Add Tecaher</a>
     </div>
     <div class="col-md-12">
         <table class="table">

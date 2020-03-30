@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { TeacherService } from '../../teacher.service';
+import { TeacherService } from '../services/teacher.service';
 import { Router } from '@angular/router';
-import { ACADEMIC_YEARS } from './../../const/academic.years';
+import { ACADEMIC_YEARS } from '../const/academic.years';
 
 @Component({
   selector: 'app-add',

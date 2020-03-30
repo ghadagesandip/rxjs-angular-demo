@@ -1,25 +1,30 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { ReactiveFormsModule } from '@angular/forms';
 
 import { TeacherRoutingModule } from './teacher-routing.module';
 import { LayoutComponent } from './layout/layout.component';
-import { ListComponent } from './pages/list/list.component';
-import { AddComponent } from './pages/add/add.component';
-import { EditComponent } from './pages/edit/edit.component';
-import { TeacherService } from './teacher.service';
-import { ReactiveFormsModule } from '@angular/forms';
+import { ListComponent } from './list-teacher/list.component';
+import { AddComponent } from './add-teacher/add.component';
+import { EditComponent } from './edit-teacher/edit.component';
+import { AcademicYearPipe } from './pipe/academic-year.pipe';
+import { HeaderComponent } from './components/header/header.component';
+import { FooterComponent } from './components/footer/footer.component'; 
+
 import {AuthGaurdService } from './guards/auth-guard.service';
-import { AcademicYearPipe } from './pipe/academic-year.pipe'; 
+import { CanDeactivateGuard } from './guards/can-deactivate-guard.service';
+import { TeacherService } from './services/teacher.service';
+
 
 @NgModule({
   declarations: [
-    LayoutComponent, ListComponent, AddComponent, EditComponent, AcademicYearPipe
+    LayoutComponent, ListComponent, AddComponent, EditComponent, AcademicYearPipe, HeaderComponent, FooterComponent
   ],
   imports: [
     CommonModule,
     TeacherRoutingModule,
     ReactiveFormsModule
   ],
-  providers: [TeacherService, AuthGaurdService]
+  providers: [TeacherService, AuthGaurdService, CanDeactivateGuard]
 })
 export class TeacherModule { }
