@@ -10,14 +10,14 @@ export class AuthGaurdService implements CanActivate {
   constructor(
     public router: Router,
     private authService: AuthService) {
-    console.log('can activate called')
+    // console.log('can activate called')
   }
 
   canActivate(): boolean {
     let isLoggedIn:boolean;
     this.authService.isLoggedIn().subscribe(
       (resp) => {
-        console.log('resp =>>> ', resp)
+        // console.log('resp =>>> ', resp)
         isLoggedIn = resp;
       }
     )

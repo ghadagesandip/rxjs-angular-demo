@@ -22,11 +22,8 @@ export class AppComponent {
     .subscribe((events: RoutesRecognized[]) => {
      
       if( events[1].urlAfterRedirects == '/login') {
-        //console.log('logout called')
         localStorage.clear();
-        //this.isLoggedIn = false;
       }
-      
     });
   }
 }

@@ -6,6 +6,7 @@ import { Teacher } from '../types/teacher';
 import { ACADEMIC_YEARS } from '../const/academic.years';
 import { DialogService } from '../services/dialog.service';
 import { Observable } from 'rxjs';
+import { AcademicYear } from '../types/academic.years.type';
 
 @Component({
   selector: 'app-edit',
@@ -16,7 +17,9 @@ export class EditComponent implements OnInit {
 
   editForm: FormGroup;
   errorMsg: string;
-  academic_years;
+  academic_years:AcademicYear[];
+  submitted: boolean = false;
+
   constructor(
     private fb: FormBuilder,
     private teacherService: TeacherService,
@@ -27,8 +30,7 @@ export class EditComponent implements OnInit {
 
   canDeactivate(): Observable<boolean> | boolean {
 
-    if ( this.editForm.dirty) {
-
+    if ( this.editForm.dirty && !this.submitted ) {
       return this.dialogService.confirm('Discard changes for teacher?');
     }
     return true;
@@ -69,6 +71,7 @@ export class EditComponent implements OnInit {
 
   onSubmit() {
     if(this.editForm.valid) {
+      this.submitted = true;
       this.teacherService.updateTeacherfromList(this.editForm.value).subscribe(
         (resp: boolean)=> {
           if(resp) {

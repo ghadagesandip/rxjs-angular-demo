@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { ACADEMIC_YEARS } from '../const/academic.years';
 import { DialogService } from '../services/dialog.service';
 import { Observable } from 'rxjs';
+import { AcademicYear } from '../types/academic.years.type';
 
 @Component({
   selector: 'app-add',
@@ -15,7 +16,9 @@ export class AddComponent implements OnInit {
 
   addForm: FormGroup;
   errorMsg: string;
-  academic_years;
+  academic_years:AcademicYear[];
+  submitted: boolean = false;
+
   constructor(
     private fb: FormBuilder,
     private teacherService: TeacherService,
@@ -48,8 +51,8 @@ export class AddComponent implements OnInit {
 
 
   onSubmit() {
-    console.log('this.addForm', this.addForm.value)
     if(this.addForm.valid) {
+      this.submitted = true;
       this.teacherService.addTeacherToList(this.addForm.value).subscribe(
         (resp: boolean)=> {
           if(resp) {

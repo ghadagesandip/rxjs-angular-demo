@@ -36,20 +36,16 @@ export class ListComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    // this.teacherService.getTeachersList().subscribe(
-    //   (resp: Teacher[]) => {
-    //     this.teachers = resp
-    //   }
-    // )
-
-    
-    this.view = this.teacherService.getTeachersList().pipe(
-      map(data => process(data, this.gridState))
+    this.view = this.teacherService.getTeachersList()
+    .pipe(
+      map(data => {
+          return process(data, this.gridState)
+        }
+      )
     )
    
     this.authService.isAdmin().subscribe(
       (resp) => {
-        console.log('resp:: ', resp)
         this.isAdmin = resp;
       }
     );

@@ -27,6 +27,11 @@ import { GridModule } from '@progress/kendo-angular-grid';
     ReactiveFormsModule,
     GridModule,
   ],
-  providers: [TeacherService, AuthGaurdService, CanDeactivateGuard, DialogService]
+  providers: [
+    TeacherService,
+    AuthGaurdService,
+    CanDeactivateGuard,
+    DialogService
+  ]
 })
 export class TeacherModule { }

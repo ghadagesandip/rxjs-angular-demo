@@ -16,7 +16,10 @@ const routes: Routes = [
     children: [
       {
         path:'',
-        component: ListComponent
+        component: ListComponent,
+        data: {
+          reuse: true
+        }
       },
       {
         path:'new',

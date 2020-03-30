@@ -9,6 +9,8 @@ import { CommonModule } from '@angular/common';
 import { AuthService } from './login/auth.service';
 import { GridModule } from '@progress/kendo-angular-grid';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { RouteReuseStrategy } from '@angular/router';
+import { RouteReuseService } from './modules/teacher/services/cache-route-reuse.strategy';
 
 @NgModule({
   declarations: [
@@ -24,7 +26,11 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     BrowserAnimationsModule
   ],
   providers: [
-    AuthService
+    AuthService,
+    {
+      provide: RouteReuseStrategy,
+      useClass: RouteReuseService
+    }
   ],
   bootstrap: [AppComponent]
 })

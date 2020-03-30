@@ -17,11 +17,11 @@ export class AdminGuardService implements CanActivate {
     let isadmin: boolean;
     this.authService.isAdmin().subscribe(
       (resp) => {
-        console.log('resp is admin', resp)
+       // console.log('resp is admin', resp)
         isadmin = resp;
       }
     )
-    console.log('resp isadmin ', isadmin)
+    // console.log('resp isadmin ', isadmin)
     return isadmin;
   }
 }
