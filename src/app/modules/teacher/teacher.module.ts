@@ -14,7 +14,8 @@ import { FooterComponent } from './components/footer/footer.component';
 import {AuthGaurdService } from './guards/auth-guard.service';
 import { CanDeactivateGuard } from './guards/can-deactivate-guard.service';
 import { TeacherService } from './services/teacher.service';
-
+import { DialogService } from './services/dialog.service';
+import { GridModule } from '@progress/kendo-angular-grid';
 
 @NgModule({
   declarations: [
@@ -23,8 +24,9 @@ import { TeacherService } from './services/teacher.service';
   imports: [
     CommonModule,
     TeacherRoutingModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    GridModule,
   ],
-  providers: [TeacherService, AuthGaurdService, CanDeactivateGuard]
+  providers: [TeacherService, AuthGaurdService, CanDeactivateGuard, DialogService]
 })
 export class TeacherModule { }

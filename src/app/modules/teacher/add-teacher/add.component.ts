@@ -3,6 +3,8 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { TeacherService } from '../services/teacher.service';
 import { Router } from '@angular/router';
 import { ACADEMIC_YEARS } from '../const/academic.years';
+import { DialogService } from '../services/dialog.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-add',
@@ -17,7 +19,8 @@ export class AddComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private teacherService: TeacherService,
-    private router: Router
+    private router: Router,
+    public dialogService: DialogService
   ) { }
 
   ngOnInit(): void {
@@ -25,6 +28,15 @@ export class AddComponent implements OnInit {
     this.createLoginForm();
   }
 
+  canDeactivate(): Observable<boolean> | boolean {
+    if ( this.addForm.dirty) {
+
+      return this.dialogService.confirm('Discard changes for teacher?');
+    }
+    return true;
+  }
+
+  
   createLoginForm(){
     this.addForm = this.fb.group({
       first_name: ['', Validators.required],

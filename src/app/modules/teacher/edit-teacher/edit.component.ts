@@ -4,6 +4,8 @@ import { TeacherService } from '../services/teacher.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Teacher } from '../types/teacher';
 import { ACADEMIC_YEARS } from '../const/academic.years';
+import { DialogService } from '../services/dialog.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-edit',
@@ -19,8 +21,18 @@ export class EditComponent implements OnInit {
     private fb: FormBuilder,
     private teacherService: TeacherService,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    public dialogService: DialogService
   ) { }
+
+  canDeactivate(): Observable<boolean> | boolean {
+
+    if ( this.editForm.dirty) {
+
+      return this.dialogService.confirm('Discard changes for teacher?');
+    }
+    return true;
+  }
 
   ngOnInit(): void {
    this.academic_years = ACADEMIC_YEARS;

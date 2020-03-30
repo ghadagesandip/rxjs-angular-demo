@@ -4,6 +4,12 @@ import { TeacherService } from '../services/teacher.service';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/login/auth.service';
 
+
+import { GridDataResult } from '@progress/kendo-angular-grid';
+import { State, process } from '@progress/kendo-data-query';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
+
 @Component({
   selector: 'app-list',
   templateUrl: './list.component.html',
@@ -13,6 +19,12 @@ export class ListComponent implements OnInit {
 
   teachers: Teacher[];
   isAdmin: boolean;
+  public view: Observable<GridDataResult>;
+  public gridState: State = {
+    sort: [],
+    skip: 0,
+    take: 10
+  };
   
   constructor(
     private teacherService: TeacherService,
@@ -21,12 +33,14 @@ export class ListComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    
-    this.teacherService.getTeachersList().subscribe(
-      (resp: Teacher[]) => {
-        console.log('resp list', resp)
-        this.teachers = resp
-      }
+    // this.teacherService.getTeachersList().subscribe(
+    //   (resp: Teacher[]) => {
+    //     this.teachers = resp
+    //   }
+    // )
+
+    this.view = this.teacherService.getTeachersList().pipe(
+      map(data => process(data, this.gridState))
     )
    
     this.authService.isAdmin().subscribe(
@@ -40,6 +54,13 @@ export class ListComponent implements OnInit {
     this.router.navigate(['teachers/edit', teacher.id])
   }
 
+  public onStateChange(state: State) {
+    this.gridState = state;
+
+    this.view = this.teacherService.getTeachersList().pipe(
+      map(data => process(data, this.gridState))
+    )
+}
  
 
 }

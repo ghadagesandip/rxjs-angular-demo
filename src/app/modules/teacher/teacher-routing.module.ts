@@ -6,6 +6,7 @@ import { AddComponent } from './add-teacher/add.component';
 import { EditComponent } from './edit-teacher/edit.component';
 import { AuthGaurdService } from './guards/auth-guard.service';
 import { AdminGuardService } from './guards/admin.guard.service';
+import { CanDeactivateGuard } from './guards/can-deactivate-guard.service';
 
 const routes: Routes = [
   {
@@ -20,12 +21,14 @@ const routes: Routes = [
       {
         path:'new',
         component: AddComponent,
-        canActivate:[AdminGuardService]
+        canActivate:[AdminGuardService],
+        canDeactivate: [CanDeactivateGuard]
       },
       {
         path:'edit/:id',
         component: EditComponent,
-        canActivate:[AdminGuardService]
+        canActivate:[AdminGuardService],
+        canDeactivate: [CanDeactivateGuard]
       }
     ]
   },
