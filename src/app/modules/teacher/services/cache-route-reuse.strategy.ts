@@ -5,6 +5,8 @@ export class RouteReuseService implements RouteReuseStrategy {
     private handlers: { [key: string]: DetachedRouteHandle } = {};
 
     shouldDetach(route: ActivatedRouteSnapshot): boolean {
+        console.log('shouldDetach')
+
         if (!route.routeConfig || route.routeConfig.loadChildren) {
             return false;
         }
@@ -17,6 +19,7 @@ export class RouteReuseService implements RouteReuseStrategy {
     }
 
     store(route: ActivatedRouteSnapshot, handler: DetachedRouteHandle): void {
+        console.log('store', this.getUrl(route))
 
         if (handler) {
             this.handlers[this.getUrl(route)] = handler;
@@ -24,11 +27,14 @@ export class RouteReuseService implements RouteReuseStrategy {
     }
 
     shouldAttach(route: ActivatedRouteSnapshot): boolean {
-
+       console.log('shouldAttach')
+        
         return !!this.handlers[this.getUrl(route)];
     }
 
     retrieve(route: ActivatedRouteSnapshot): DetachedRouteHandle {
+       console.log('retrieve')
+
         if (!route.routeConfig || route.routeConfig.loadChildren) {
             return null;
         };
@@ -36,6 +42,7 @@ export class RouteReuseService implements RouteReuseStrategy {
     }
 
     shouldReuseRoute(future: ActivatedRouteSnapshot, current: ActivatedRouteSnapshot): boolean {
+       console.log('shouldReuseRoute')
         let reUseUrl = false;
         if (future.routeConfig) {
         if (future.routeConfig.data) {

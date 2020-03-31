@@ -39,6 +39,7 @@ export class ListComponent implements OnInit {
     this.view = this.teacherService.getTeachersList()
     .pipe(
       map(data => {
+        console.log('teachers fetched', data)
           return process(data, this.gridState)
         }
       )
@@ -46,6 +47,7 @@ export class ListComponent implements OnInit {
    
     this.authService.isAdmin().subscribe(
       (resp) => {
+        
         this.isAdmin = resp;
       }
     );
