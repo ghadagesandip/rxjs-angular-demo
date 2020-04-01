@@ -69,11 +69,11 @@ export class ListComponent implements OnInit {
   }
 
   public onStateChange(state: State) {
-     console.log('state  :::', state)
-    // this.gridState = state;
-    // this.view = this.teacherService.getTeachersList().pipe(
-    //   map(data => process(data, this.gridState))
-    // )
+    console.log('state  :::', state)
+    this.gridState = state;
+    this.view = this.teacherService.getTeachersList().pipe(
+      map(data => process(data, this.gridState))
+    )
   }
   
   public clickHandler({ dataItem }: CellClickEvent): void {
