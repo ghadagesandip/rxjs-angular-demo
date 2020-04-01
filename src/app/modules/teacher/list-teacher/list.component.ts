@@ -41,6 +41,7 @@ export class ListComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    console.log('ACADEMIC_YEARS', this.distinctAcadmicYears)
     this.view = this.teacherService.getTeachersList()
     .pipe(
       map(data => {

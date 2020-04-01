@@ -71,6 +71,8 @@ export class TeacherService {
 
   filterTeachers(academicYearId: number): void {
    if(academicYearId) {
+
+    console.log('academicYearId', academicYearId)
     const filtredResult = this.initialTeachers.filter((teacher: any) => {
        return teacher.academic_year == academicYearId;
     })
