@@ -3,14 +3,13 @@ import { Teacher } from '../types/teacher';
 import { TeacherService } from '../services/teacher.service';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/login/auth.service';
-
-
-import { GridDataResult } from '@progress/kendo-angular-grid';
+import { GridDataResult, GridComponent, CellClickEvent, RowClassArgs, DataStateChangeEvent } from '@progress/kendo-angular-grid';
 import { State, process } from '@progress/kendo-data-query';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { RowClassArgs } from '@progress/kendo-angular-grid';
-import { AddEvent, GridComponent, CellClickEvent } from '@progress/kendo-angular-grid'
+import { ACADEMIC_YEARS } from './../const/academic.years';
+import { AcademicYear } from './../types/academic.years.type';
+import { filterBy, FilterDescriptor, CompositeFilterDescriptor } from '@progress/kendo-data-query';
 
 @Component({
   selector: 'app-list',
@@ -22,11 +21,17 @@ export class ListComponent implements OnInit {
 
   teachers: Teacher[];
   isAdmin: boolean = false;
+  public filter: CompositeFilterDescriptor;
+  distinctAcadmicYears: AcademicYear[] = ACADEMIC_YEARS;
   public view: Observable<GridDataResult>;
   public gridState: State = {
     sort: [],
     skip: 0,
-    take: 10
+    take: 10,
+    filter: {
+      logic: 'and',
+      filters: []
+    }
   };
   
   constructor(
@@ -47,7 +52,6 @@ export class ListComponent implements OnInit {
    
     this.authService.isAdmin().subscribe(
       (resp) => {
-        
         this.isAdmin = resp;
       }
     );
@@ -64,13 +68,13 @@ export class ListComponent implements OnInit {
   }
 
   public onStateChange(state: State) {
+    console.log('state  :::', state)
     this.gridState = state;
-
     this.view = this.teacherService.getTeachersList().pipe(
       map(data => process(data, this.gridState))
     )
   }
-
+  
   public clickHandler({ dataItem }: CellClickEvent): void {
     this.router.navigate(['teachers/edit', dataItem.id])
   }

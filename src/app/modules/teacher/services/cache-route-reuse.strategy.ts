@@ -27,7 +27,6 @@ export class RouteReuseService implements RouteReuseStrategy {
     }
 
     shouldAttach(route: ActivatedRouteSnapshot): boolean {
-       console.log('shouldAttach')
         
         return !!this.handlers[this.getUrl(route)];
     }

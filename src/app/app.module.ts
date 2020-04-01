@@ -7,10 +7,10 @@ import { LoginComponent } from './login/login.component';
 import { ReactiveFormsModule } from '@angular/forms'
 import { CommonModule } from '@angular/common';
 import { AuthService } from './login/auth.service';
-import { GridModule } from '@progress/kendo-angular-grid';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouteReuseStrategy } from '@angular/router';
 import { RouteReuseService } from './modules/teacher/services/cache-route-reuse.strategy';
+
 
 @NgModule({
   declarations: [
@@ -22,8 +22,7 @@ import { RouteReuseService } from './modules/teacher/services/cache-route-reuse.
     AppRoutingModule,
     ReactiveFormsModule,
     CommonModule,
-    GridModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
   ],
   providers: [
     AuthService,

@@ -6,6 +6,7 @@ import { ACADEMIC_YEARS } from './../const/academic.years';
 export class AcademicYearPipe implements PipeTransform {
 
   transform(value: unknown, ...args: unknown[]): unknown {
+    console.log('pipe valie', value)
    const selectedYear = ACADEMIC_YEARS.filter((year) => {
       return year.id == value
     })

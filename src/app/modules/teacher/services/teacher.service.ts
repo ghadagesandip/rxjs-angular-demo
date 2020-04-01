@@ -29,7 +29,7 @@ export class TeacherService {
   constructor() { }
 
   getTeachersList (): Observable<Teacher[]> {
-    return this.teachers.pipe(delay(2000));
+    return this.teachers.pipe(delay(500));
   }
 
   addTeacherToList(newTeacher: Teacher): Observable<boolean> {

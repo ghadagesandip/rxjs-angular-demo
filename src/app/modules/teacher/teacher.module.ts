@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
-
 import { TeacherRoutingModule } from './teacher-routing.module';
 import { LayoutComponent } from './layout/layout.component';
 import { ListComponent } from './list-teacher/list.component';
@@ -16,16 +15,23 @@ import { CanDeactivateGuard } from './guards/can-deactivate-guard.service';
 import { TeacherService } from './services/teacher.service';
 import { DialogService } from './services/dialog.service';
 import { GridModule } from '@progress/kendo-angular-grid';
+import { DropDownListModule } from '@progress/kendo-angular-dropdowns';
+import { DropDownListFilterComponent } from './list-teacher/dropdown.filter.component';
+
+
 
 @NgModule({
   declarations: [
-    LayoutComponent, ListComponent, AddComponent, EditComponent, AcademicYearPipe, HeaderComponent, FooterComponent
+    LayoutComponent, ListComponent, AddComponent,
+    EditComponent, AcademicYearPipe, HeaderComponent,
+    FooterComponent, DropDownListFilterComponent
   ],
   imports: [
     CommonModule,
     TeacherRoutingModule,
     ReactiveFormsModule,
     GridModule,
+    DropDownListModule
   ],
   providers: [
     TeacherService,

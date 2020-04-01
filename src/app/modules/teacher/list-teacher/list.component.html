@@ -21,7 +21,20 @@
         <kendo-grid-column field="id" title="Id"></kendo-grid-column>
         <kendo-grid-column field="first_name" title="First name"></kendo-grid-column>
         <kendo-grid-column field="last_name"   title="Last name"></kendo-grid-column>
-         <kendo-grid-column field="academic_year"title="Academic year"></kendo-grid-column>
+        <kendo-grid-column field="academic_year" title="Academic year">
+            <ng-template kendoGridFilterCellTemplate let-filter>
+                <my-dropdown-filter
+                    [filter]="filter"
+                    [data]="distinctAcadmicYears"
+                    textField="name"
+                    valueField="id">
+                </my-dropdown-filter>
+                <ng-template kendoGridCellTemplate let-filter let-dataItem>
+                    {{ dataItem.academic_year | AcademicYear }}
+                </ng-template>
+            </ng-template>
+            
+        </kendo-grid-column>
         <kendo-grid-column field="experience" title="experience"></kendo-grid-column>
       </kendo-grid>
     </div>
