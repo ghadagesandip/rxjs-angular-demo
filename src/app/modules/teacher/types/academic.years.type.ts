@@ -1,4 +1,4 @@
 export interface AcademicYear {
     name: number;
-    id: number;
+    academic_year: number;
 }

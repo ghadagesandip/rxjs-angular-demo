@@ -8,7 +8,7 @@ export class AcademicYearPipe implements PipeTransform {
   transform(value: unknown, ...args: unknown[]): unknown {
     console.log('pipe valie', value)
    const selectedYear = ACADEMIC_YEARS.filter((year) => {
-      return year.id == value
+      return year.academic_year == value
     })
     // console.log('selectedYear', selectedYear)
     return selectedYear[0].name;

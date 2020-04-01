@@ -27,7 +27,7 @@
                     [filter]="filter"
                     [data]="distinctAcadmicYears"
                     textField="name"
-                    valueField="id">
+                    valueField="academic_year">
                 </my-dropdown-filter>
                 <ng-template kendoGridCellTemplate let-filter let-dataItem>
                     {{ dataItem.academic_year | AcademicYear }}
